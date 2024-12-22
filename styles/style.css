@@ -320,6 +320,7 @@
 }
 
 .dialog {
+  display: none;
   box-sizing: border-box;
   max-width: 341px;
   border: 2px solid var(--color-primary);
@@ -328,7 +329,7 @@
   padding: 30px 40px;
 }
 
-.dialog[open] {
+.dialog.open {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -434,11 +435,10 @@
   }
 }
 
-@media (width < 374px) {
+@media (max-width: 374px) {
   :root {
     --logo-text-size: clamp(2.475rem, 2.5357rem + 1.6964vw, 4.0625rem);
   }
-
 }
 
 @supports ((-webkit-text-stroke: 1px var(--color-secondary)) or (text-stroke: 1px var(--color-secondary))) {
