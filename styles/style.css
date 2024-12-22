@@ -1,6 +1,8 @@
 /* Здесь вы напишете основную часть стилей страницы.
 
 Будьте внимательны! Для корректной работы скриптов на этом сайте нужно, чтобы в HTML некоторые классы были названы особым образом:
+✦ theme-dark — класс тёмной темы
+✦ theme-light — класс светлой темы
 ✦ like-icon — для svg-иконки анимированного сердца
 ✦ card__like-button — для кнопки Like рядом с иконкой
 ✦ card__icon-button — для кнопки, оборачивающей иконку
@@ -8,9 +10,441 @@
 ✦ is-liked — для обозначения состояния лайкнутой иконки в виде сердца
 ✦ button__text — для обозначения текстового элемента внутри кнопки
 
+Кроме этого, не меняйте HTML переключателя тем. Его разметка также гарантирует работу своего скрипта.
 */
 
 .page {
+  font-family: var(--font-primary);
+  background: var(--gradient-pattern);
+  background-size: cover;
+  background-attachment: fixed;
   min-inline-size: 320px;
   min-block-size: 100dvb;
+  font-variation-settings: "wght"var(--font-weight-normal, 400);
+}
+
+.container {
+  margin: 0 auto;
+  max-inline-size: 100%;
+}
+
+/* Style for header */
+/* Класс .header отвечает за стили шапки страницы. Он устанавливает расположение элементов в колонку, 
+центрирование по вертикали и горизонтали, а также внешние и внутренние отступы. */
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: var(--font-secondary);
+  line-height: normal;
+  text-transform: uppercase;
+  background-color: var(--color-secondary);
+  align-items: center;
+  margin-block-start: 102px;
+  margin-block-end: 100px;
+  border: 2px solid var(--color-primary);
+}
+
+/* Класс .logo-link определяет стили для ссылки логотипа. Содержит настройки размера, отступов, цвета текста и шрифта. */
+.logo-link {
+  max-width: max-content;
+  text-decoration: none;
+  display: block;
+  margin-block-start: clamp(7.5rem, 7.1479rem + 1.5023vw, 8.5rem);
+  font-family: var(--font-secondary);
+  font-weight: var(--font-weight-normal);
+  font-size: var(--logo-text-size);
+  text-transform: uppercase;
+  margin-block-end: 20px;
+  color: var(--color-primary);
+}
+
+/* Класс .header__title задает стили для заголовка внутри шапки, включая цвет текста, шрифт, размер и отступы. */
+.header__title {
+  margin-block-end: 20px;
+  color: var(--color-primary);
+  font-family: var(--font-secondary);
+  font-weight: var(--font-weight-normal);
+  font-size: var(--title-size);
+  text-transform: uppercase;
+}
+
+/* Style for menu */
+/* Класс .theme-menu__list отвечает за стили списка меню тем. Элементы располагаются вертикально с заданным промежутком и имеют внешние отступы. */
+.theme-menu__list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-inline-start: 20px;
+  margin-block-end: 20px;
+}
+
+.theme-menu__button {
+  position: relative;
+  border: none;
+  padding: 0;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  background-color: var(--color-secondary);
+  transition: opacity 0.3s ease;
+  font-family: var(--font-secondary);
+  font-weight: var(--font-weight-normal);
+  font-size: var(--text-small);
+  cursor: pointer;
+}
+
+.theme-menu__button::after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  background-color: var(--color-primary);
+  transition: scale 0.3s ease;
+  transform-origin: left;
+  bottom: -3px;
+  left: 0;
+  display: block;
+  width: 100%;
+  scale: 0;
+}
+
+.theme-menu__button:hover {
+  opacity: 0.6;
+}
+
+.theme-menu__button:focus {
+  outline: none;
+  opacity: 0.6;
+}
+
+/* Стили для кнопки .theme-menu__button при видимом фокусе активируют псевдоэлемент и убирают контур. */
+.theme-menu__button:focus-visible {
+  outline: none;
+  opacity: 0.6;
+}
+
+.theme-menu__button:focus-visible::after {
+  outline: none;
+  scale: 1;
+}
+
+/* Стили для отключенной кнопки .theme-menu__button задают снижение прозрачности и отключают события. */
+.theme-menu__button:disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+
+/* Style for cards */
+/* Класс .cards задает стили для контейнера карточек. Карточки располагаются вертикально с заданным промежутком. */
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.card {
+  border: 2px solid var(--color-primary);
+  background-color: var(--color-secondary);
+  padding-bottom: 25px;
+}
+
+.card__title {
+  padding: 5px 10px;
+  color: var(--color-primary);
+  font-family: var(--font-primary);
+  font-size: var(--text-size);
+  font-variation-settings: "wght"var(--font-weight-bold);
+}
+
+.card__image-box {
+  position: relative;
+  border-top: 2px solid var(--color-primary);
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.card__label {
+  position: absolute;
+  top: 25px;
+  right: 11px;
+  z-index: 1;
+  opacity: 0.5;
+  text-shadow: 0 0 1px var(--color-secondary);
+  font-family: var(--font-secondary);
+  font-size: var(--text-small);
+  mix-blend-mode: hard-light;
+  color: var(--color-primary);
+}
+
+/* Класс .card__image задает стили для изображения в карточке, включая пропорции и способ заполнения контейнера. */
+.card__image {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  aspect-ratio: 1 / 1;
+}
+
+.card__content-box {
+  display: flex;
+  flex-direction: column;
+  gap: 27px;
+  padding: 22px 26px;
+}
+
+/* Класс .card__text отвечает за стили текста в карточке, включая цвет, шрифт и межстрочный интервал. */
+.card__text {
+  font-size: var(--text-size);
+  font-style: normal;
+  line-height: 1.16;
+  color: var(--color-primary);
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+.card__controls__info {
+  display: flex;
+  align-items: center;
+  padding-right: 25px;
+  padding-left: 25px;
+  flex-direction: row;
+  justify-content: end;
+  gap: 7px;
+}
+
+.card__icon-button {
+  display: flex;
+  height: fit-content;
+  border: 2px solid transparent;
+  padding: 0;
+  background: var(--color-secondary);
+  transition: border-color 0.3s ease;
+  cursor: pointer;
+  appearance: none;
+}
+
+/* Стили для кнопки .card__icon-button при фокусе убирают стандартный контур. */
+.card__icon-button:focus {
+  outline: none;
+}
+
+/* Стили для кнопки .card__icon-button при видимом фокусе активируют рамку. */
+.card__icon-button:focus-visible {
+  border-color: var(--color-primary);
+  outline: none;
+}
+
+.card__like-button {
+  display: flex;
+  align-items: center;
+  max-width: 130px;
+  height: max-content;
+  justify-content: center;
+}
+
+.like-icon {
+  box-sizing: border-box;
+  height: min-content;
+  block-size: 36px;
+  inline-size: 34px;
+}
+
+/* Style for button */
+.button {
+  position: relative;
+  justify-content: center;
+  font-family: var(--font-secondary);
+  font-weight: var(--font-weight-normal);
+  font-size: var(--text-small);
+  box-sizing: border-box;
+  line-height: 0.9;
+  background-color: var(--color-secondary);
+  transition: box-shadow 0.3s ease;
+  cursor: pointer;
+  appearance: none;
+  border: 2px solid var(--color-primary);
+  padding: 10px 35px;
+}
+
+.button::before {
+  content: "";
+  position: absolute;
+  transition: transform 0.5s ease-in-out;
+  transform: scaleX(0);
+  transform-origin: left;
+  inset: 0;
+  z-index: 0;
+  background-color: var(--color-primary);
+}
+
+.button:hover::before {
+  transform: scaleX(1);
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button:focus-visible {
+  box-shadow: 2px 2px 0px 0px var(--color-primary);
+  outline: none;
+}
+
+.button__icon {
+  display: flex;
+  width: 28px;
+  height: 28px;
+  mix-blend-mode: difference;
+  color: var(--color-button-text);
+}
+
+.button__text {
+  display: block;
+  height: max-content;
+  font-size: var(--text-small);
+  font-style: normal;
+  line-height: 0.9;
+  mix-blend-mode: difference;
+  color: var(--color-button-text);
+  font-family: var(--font-secondary);
+  font-weight: var(--font-weight-normal);
+}
+
+/* Save */
+.save {
+  display: flex;
+  align-items: flex-start;
+  margin: 0 auto;
+  margin-block-start: 48px;
+  margin-block-end: 102px;
+  justify-content: center;
+}
+
+.dialog {
+  box-sizing: border-box;
+  max-width: 341px;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  background: var(--color-secondary);
+  padding: 30px 40px;
+}
+
+.dialog[open] {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+}
+
+.dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.dialog__content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+.dialog__icon {
+  flex: none;
+  width: 39px;
+  height: 39px;
+}
+
+.dialog__text {
+  color: var(--color-primary);
+  font-size: var(--text-small);
+  font-style: normal;
+  line-height: 1.5;
+  text-transform: uppercase;
+  font-family: var(--font-secondary);
+  font-weight: var(--font-weight-normal);
+}
+
+.dialog__button {
+  width: 100%;
+}
+
+.button__open {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  padding: 15px 20px;
+}
+
+/* filter */
+.filter-hue-rotate {
+  filter: hue-rotate(-60deg);
+}
+
+.filter-contrast-rotate {
+  filter: contrast(90%) hue-rotate(90deg) saturate(88%);
+}
+
+.filter-grayscale-ss {
+  filter: grayscale(60%) sepia(85%) saturate(90%);
+}
+
+.filter-saturate {
+  filter: saturate(200%);
+}
+
+.filter-invert {
+  filter: invert(20%);
+}
+
+.filter-sepia {
+  filter: sepia(80%);
+}
+
+.filter-blur {
+  filter: blur(2px);
+}
+
+
+@media (width >=696px) {
+  .container {
+    max-inline-size: clamp(700px, 100%, var(--max-container-width));
+  }
+
+  .button__open {
+    flex-direction: row;
+  }
+
+  .button__icon {
+    width: 21px;
+    height: 21px;
+  }
+
+  .dialog {
+    max-width: 353px;
+    padding: 30px;
+  }
+
+  .card__label {
+    right: 25px;
+  }
+
+  .like-icon {
+    block-size: 36px;
+  }
+}
+
+@media (width < 374px) {
+  :root {
+    --logo-text-size: clamp(2.475rem, 2.5357rem + 1.6964vw, 4.0625rem);
+  }
+
+}
+
+@supports ((-webkit-text-stroke: 1px var(--color-secondary)) or (text-stroke: 1px var(--color-secondary))) {
+  .card__label {
+    text-shadow: none;
+    -webkit-text-stroke: 1px var(--color-secondary);
+    text-stroke: 1px var(--color-secondary);
+  }
 }
