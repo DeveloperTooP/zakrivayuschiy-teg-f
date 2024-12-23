@@ -36,3 +36,9 @@
   --color-heart-filled: var(--color-heart);
   --color-heart-unfilled: #000000;
 }
+
+@media (max-width: 374px) {
+  :root {
+    --logo-text-size: clamp(2.475rem, 2.5357rem + 1.6964vw, 4.0625rem);
+  }
+}
